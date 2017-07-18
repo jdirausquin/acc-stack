@@ -2,7 +2,7 @@
   Jump Hosts
 */
 resource "aws_security_group" "jumphost" {
-    name = "sg-uw2-acc-stack-jh"
+    name = "sg_acc-stack-jh"
     description = "Allow incoming RDP connections."
 
     ingress {
@@ -21,13 +21,13 @@ resource "aws_security_group" "jumphost" {
     
     vpc_id = "${aws_vpc.vpc.id}"
     tags {
-        Name = "JumpHost"
+        Name = "sg_acc-stack-uw2-jh"
     }
 }
 
 resource "aws_instance" "jh01" {
     ami = "${lookup(var.amis, var.aws_region)}"
-    instance_type = "t2.medium"
+    instance_type = "${var.aws_instance_type}"
     key_name = "${var.aws_key_name}"
     vpc_security_group_ids = ["${aws_security_group.jumphost.id}"]
     subnet_id = "${aws_subnet.subnet-pub-uw2a.id}"
@@ -44,7 +44,7 @@ resource "aws_eip" "eip_jh01" {
 
 resource "aws_instance" "jh02" {
     ami = "${lookup(var.amis, var.aws_region)}"
-    instance_type = "t2.medium"
+    instance_type = "${var.aws_instance_type}"
     key_name = "${var.aws_key_name}"
     vpc_security_group_ids = ["${aws_security_group.jumphost.id}"]
     subnet_id = "${aws_subnet.subnet-pub-uw2b.id}"

@@ -1,15 +1,31 @@
 variable "aws_region" {
     description = "EC2 Region for the VPC"
-    default = "us-west-2"
+    default = "us-east-1"
 }
+
+variable "aws_az_a" {
+    description = "EC2 AZ a"
+    default = "us-east-1a"
+}
+
+variable "aws_az_b" {
+    description = "EC2 AZ b"
+    default = "us-east-1b"
+}
+
 variable "amis" {
     description = "AMIs by region"
     default = {
-        us-west-2 = "ami-8d0c07f4" # Windows Server 2012 R2 Standar
+        us-east-1 = "ami-f4d1f0e2" # Windows Server 2012 R2 Standar
     }
 }
 
-variable "key_name" {
+variable "aws_instance_type" {
+    description = "EC2 instance type" 
+    default = "t1.micro"
+}
+
+variable "aws_key_name" {
     default = "devops"
 }
 

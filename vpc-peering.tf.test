@@ -1,0 +1,49 @@
+/*
+  VPC Peering
+*/
+
+data "aws_caller_identity" "current" {
+}
+
+resource "aws_vpc_peering_connection" "vpc-omn-dev" {
+  peer_owner_id = "${resource.aws_caller_identity.current.account_id}"
+  peer_vpc_id   = "${var.vpc_omn_dev}"
+  vpc_id        = "${aws_vpc.vpc.id}"
+  auto_accept = true
+  tags {
+    Name = "acc-stack_omn-dev"
+  }
+}
+resource "aws_vpc_peering_connection" "vpc-omn-qa" {
+  peer_owner_id = "${resource.aws_caller_identity.current.account_id}"
+  peer_vpc_id   = "${var.vpc_omn_qa}"
+  vpc_id        = "${aws_vpc.vpc.id}"
+  auto_accept = true
+  tags {
+    Name = "acc-stack_omn-qa"
+  }
+}
+resource "aws_vpc_peering_connection" "vpc-apollo-dev" {
+  peer_owner_id = "${resource.aws_caller_identity.current.account_id}"
+  peer_vpc_id   = "${var.vpc_apollo_dev}"
+  vpc_id        = "${aws_vpc.vpc.id}"
+  auto_accept = true
+  tags {
+    Name = "acc-stack_apollo-dev"
+  }
+}
+resource "aws_vpc_peering_connection" "vpc-apollo-qa" {
+  peer_owner_id = "${resource.aws_caller_identity.current.account_id}"
+  peer_vpc_id   = "${var.vpc_apollo_dev}"
+  vpc_id        = "${aws_vpc.vpc.id}"
+  auto_accept = true
+  tags {
+    Name = "acc-stack_apollo-qa"
+  }
+}
+
+resource "aws_route" "vpc-route-peering" {
+  route_table_id            = "${aws_route_table.rtb-pub.id}"
+  destination_cidr_block    = "${cidrsubnet(data.aws_vpc.var.vpc_omn_dev.cidr_block, 4, 1)}"
+}
+

@@ -29,27 +29,49 @@ variable "aws_key_name" {
     default = "devops"
 }
 
+variable "company_network" {
+    description = "CIDR for the whole company"
+    default = "172.16.0.0/12"
+}
+
 variable "vpc_cidr" {
     description = "CIDR for the whole VPC"
-    default = "172.33.0.0/16"
+    default = "172.16.0.0/16"
 }
 
 variable "subnet_pub_cidr_a" {
     description = "CIDR for the Public Subnet AZ a"
-    default = "172.33.1.0/24"
+    default = "172.16.1.0/24"
 }
 
 variable "subnet_pub_cidr_b" {
     description = "CIDR for the Public Subnet AZ b"
-    default = "172.33.2.0/24"
+    default = "172.16.2.0/24"
 }
 
 variable "subnet_pri_cidr_a" {
     description = "CIDR for the Private Subnet AZ a"
-    default = "172.33.10.0/24"
+    default = "172.16.10.0/24"
 }
 
 variable "subnet_pri_cidr_b" {
     description = "CIDR for the Private Subnet AZ b"
-    default = "172.33.11.0/24"
+    default = "172.16.11.0/24"
+}
+
+variable "vpc_omn_dev" {
+    default = "vpc-34174550"
+}
+variable "vpc_omn_qa" {
+    default = "vpc-f0e23c97"
+}
+variable "vpc_apollo_dev" {
+    default = "vpc-35c98051"
+}
+variable "vpc_apollo_qa" {
+    default = "vpc-395fa15e"
+}
+
+provider "aws" {
+    region  = "${var.aws_region}"
 }

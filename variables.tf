@@ -60,16 +60,10 @@ variable "subnet_pri_cidr_b" {
 }
 
 variable "vpc_omn_dev" {
-    default = "vpc-34174550"
+    default = "vpc-123456"
 }
 variable "vpc_omn_qa" {
-    default = "vpc-f0e23c97"
-}
-variable "vpc_apollo_dev" {
-    default = "vpc-35c98051"
-}
-variable "vpc_apollo_qa" {
-    default = "vpc-395fa15e"
+    default = "vpc-654321"
 }
 
 provider "aws" {
